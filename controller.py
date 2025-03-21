@@ -10,10 +10,9 @@ class SpellChecker:
 
     def handleSentence(self, txtIn, language, modality):
         txtIn = replaceChars(txtIn.lower())
-
         words = txtIn.split()
-        paroleErrate = " - "
 
+        paroleErrate = "Parole errate: "
         match modality:
             case "Default":
                 t1 = time.time()
@@ -22,7 +21,10 @@ class SpellChecker:
                     if not parola.corretta:
                         paroleErrate = paroleErrate + str(parola) + " - "
                 t2 = time.time()
-                return paroleErrate, t2 - t1
+                tempo = t2-t1
+                self._view.txtOut.controls.append(ft.Text(paroleErrate))
+                self._view.txtOut.controls.append(ft.Text("Tempo impiegato: " + str(tempo)))
+                self._view.page.update()
 
             case "Linear":
                 t1 = time.time()
@@ -43,18 +45,6 @@ class SpellChecker:
                 return paroleErrate, t2 - t1
             case _:
                 return None
-
-
-    def printMenu(self):
-        print("______________________________\n" +
-              "      SpellChecker 101\n"+
-              "______________________________\n " +
-              "Seleziona la lingua desiderata\n"
-              "1. Italiano\n" +
-              "2. Inglese\n" +
-              "3. Spagnolo\n" +
-              "4. Exit\n" +
-              "______________________________\n")
 
 
 def replaceChars(text):
