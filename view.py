@@ -5,6 +5,7 @@ import flet as ft
 class View(object):
     def __init__(self, page: ft.Page):
         # Page
+        self.__btnCheck = None
         self.txtOut = None
         self.page = page
         self.page.title = "TdP 2024 - Lab 04 - SpellChecker ++"
@@ -37,7 +38,7 @@ class View(object):
                                                ft.dropdown.Option("Dichotomic")])
 
         self.txtIn = ft.TextField(label="Add your sentence here", width=400)
-        self.__btnCheck = ft.ElevatedButton("Spell check", on_click=self.__controller.handleSentence(self.txtIn.value,self.__ddLingua.value,self.__ddRicerca.value))
+        self.__btnCheck = ft.ElevatedButton("Spell check", on_click=self.__controller.handleSentence)
 
         row3 = ft.Row([self.__ddRicerca, self.txtIn, self.__btnCheck])
         self.txtOut = ft.ListView(expand=True)
@@ -66,3 +67,9 @@ class View(object):
         #     ft.colors.GREY_900 if self.page.theme_mode == ft.ThemeMode.DARK else ft.colors.GREY_300
         # )
         self.page.update()
+
+    def getDDRicerca(self):
+        return self.__ddRicerca.value
+
+    def getDDLingua(self):
+        return self.__ddLingua.value

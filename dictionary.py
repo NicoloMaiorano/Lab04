@@ -7,7 +7,7 @@ class Dictionary:
         file_path = path
         with open(file_path, 'r') as file:
             for line in file:
-                value = line.strip()
+                value = line.strip("\n")
                 self._dict.append(value.lower())
 
     def printAll(self):
